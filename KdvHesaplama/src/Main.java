@@ -9,7 +9,7 @@ public class Main {
         double dusukKdv=1.08;
         System.out.println("Kdvsiz Fiyat="+tutar);
         System.out.println(tutar<1000 ? "Kdv oranı =%18":"Kdv Oranı %8");
-        System.out.println(tutar<1000 ? "Kdv Dahil fiyat"+tutar*kdv:"Kdv Dahil fiyat"+tutar*dusukKdv);
+        System.out.println(tutar<1000 ? "Kdv Dahil fiyat = "+tutar*kdv:"Kdv Dahil fiyat = "+tutar*dusukKdv);
 
 
 
