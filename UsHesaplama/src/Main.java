@@ -10,7 +10,6 @@ public class Main {
         num2=input.nextInt();
         int sonuc=1;
         for (int i=1;i<=num2;i++){
-            //System.out.println(i);
             sonuc*=num1;
         }
         System.out.println(num1+"^"+num2+" = "+sonuc);
