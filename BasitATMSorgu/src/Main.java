@@ -7,7 +7,7 @@ public class Main {
         int hak = 3;
         int balance = 1500;
         int secim;
-        while (hak > 0) {
+        while (hak>0) {
             System.out.println("Kullanıcı Adınız :");
             userName = input.nextLine();
             System.out.println("Parolanız : ");
@@ -51,10 +51,9 @@ public class Main {
                 }
 
 
-            }else{
+            } else {
                 System.out.println("Hatalı kullanıcı adı veya şifre. Tekrar deneyiniz.");
             }
-
 
         }
     }
