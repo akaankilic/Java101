@@ -8,7 +8,7 @@ public class Main {
         int balance = 1500;
         int secim;
 
-        while (hak>0) {
+        while (hak > 0) {
             String userName, password;
             System.out.print("Kullanıcı Adınız :");
             userName = input.next();
@@ -46,19 +46,18 @@ public class Main {
                         System.out.println("Tekrar görüşmek üzere.");
                         break;
                     default:
-                        hak--;
+                        System.out.println("Hatalı Seçim Yaptınız");
+
                 }
 
+            } else {
+                System.out.println("Hatalı kullanıcı adı veya şifre. Tekrar deneyiniz.");
+                hak--;
                 if (hak == 0) {
                     System.out.println("Hesabınız bloke olmuştur lütfen banka ile iletişime geçiniz.");
                 } else {
                     System.out.println("Kalan Hakkınız : " + hak);
                 }
-
-
-            } else {
-                System.out.println("Hatalı kullanıcı adı veya şifre. Tekrar deneyiniz.");
-
             }
 
         }
