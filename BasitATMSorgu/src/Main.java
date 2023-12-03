@@ -2,16 +2,18 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String userName, password;
+
         Scanner input = new Scanner(System.in);
         int hak = 3;
         int balance = 1500;
         int secim;
+
         while (hak>0) {
-            System.out.println("Kullanıcı Adınız :");
-            userName = input.nextLine();
-            System.out.println("Parolanız : ");
-            password = input.nextLine();
+            String userName, password;
+            System.out.print("Kullanıcı Adınız :");
+            userName = input.next();
+            System.out.print("Parolanız : ");
+            password = input.next();
 
             if (userName.equals("patika") && password.equals("dev123")) {
                 System.out.println("Merhaba, Kodluyoruz Bankasına Hoşgeldiniz!");
@@ -27,16 +29,19 @@ public class Main {
                         int price = input.nextInt();
                         balance += price;
                         System.out.println("Hesabınızdaki güncel bakiye = " + balance);
+                        System.out.println("Tekrar görüşmek üzere.");
                         break;
                     case 2:
                         System.out.print("Para miktarı : ");
                         price = input.nextInt();
                         balance -= price;
                         System.out.println("Hesabınızdaki güncel bakiye = " + balance);
+                        System.out.println("Tekrar görüşmek üzere.");
                         break;
 
                     case 3:
                         System.out.println("Bakiyeniz : " + balance);
+                        System.out.println("Tekrar görüşmek üzere.");
                     case 4:
                         System.out.println("Tekrar görüşmek üzere.");
                         break;
@@ -53,6 +58,7 @@ public class Main {
 
             } else {
                 System.out.println("Hatalı kullanıcı adı veya şifre. Tekrar deneyiniz.");
+
             }
 
         }
