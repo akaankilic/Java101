@@ -22,6 +22,7 @@ public class Main {
         int a=input.nextInt();
         System.out.print("Üs değerini giriniz : ");
         int b=input.nextInt();
+        input.close();
         usAlma(a,b);
 
     }
