@@ -13,7 +13,7 @@ import java.util.Scanner;
          int sonuc=1;
          for (int i=1;i<=b;i++){
              sonuc*=a;
-         }         System.out.println(sonuc);
+         }         System.out.println("Sonuc : "+sonuc);
          usAlma();
      }     public static void main(String[] args) {
          usAlma();
