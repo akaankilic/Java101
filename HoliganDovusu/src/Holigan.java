@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Holigan {
     String name;
     String team;
@@ -12,5 +14,6 @@ public class Holigan {
         this.damage=damage;
 
     }
+
 
 }
