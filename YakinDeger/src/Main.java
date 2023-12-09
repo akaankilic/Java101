@@ -9,29 +9,28 @@ public class Main {
         Scanner input = new Scanner(System.in);
         System.out.print("Bir değer giriniz :");
         int a = input.nextInt();
-        System.out.println("Dizi = "+Arrays.toString(list));
+        System.out.println("Dizi = " + Arrays.toString(list));
         Arrays.sort(list);
-        System.out.println("Girilen Değer : "+a);
-        int kucukYakin=a;
-        int temp=a;
+        System.out.println("Girilen Değer : " + a);
+        int kucukYakin = a;
+
         int gecici;
-        int buyukYakin=list[list.length-1];
-        for (int i:list){
-            if (i<a){
-                kucukYakin=i;
+        int buyukYakin = list[list.length - 1];
+        for (int i : list) {
+            if (i < a) {
+                kucukYakin = i;
             }
         }
-        for (int i:list)
-            if (i>a){
-                temp=i;
-                gecici=temp;
-                if (gecici>a&&gecici<buyukYakin){
-                    buyukYakin=gecici;
+        for (int i : list)
+            if (i > a) {
+                gecici = i;
+                if (gecici > a && gecici < buyukYakin) {
+                    buyukYakin = gecici;
                 }
             }
 
-        System.out.println("Girilen sayıdan küçük en yakın sayı : "+kucukYakin);
-        System.out.println("Girilen sayıdan büyük en yakın sayı : "+buyukYakin);
+        System.out.println("Girilen sayıdan küçük en yakın sayı : " + kucukYakin);
+        System.out.println("Girilen sayıdan büyük en yakın sayı : " + buyukYakin);
 
     }
 
