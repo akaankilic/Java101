@@ -19,9 +19,6 @@ public class Main {
                     dizi[j] = -1;
                 }
             }
-
-
-
             System.out.println(eleman + " sayısı " + frekans + " kere tekrar edildi.");
         }
     }
