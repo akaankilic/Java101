@@ -2,20 +2,20 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class MineSweeper {
-    int rowNumber;
-    int colNumber;
+    int row;
+    int col;
     String[][] mayinMap;
     String[][] gameMap;
     int mayinSayisi;
-    int a;
-    int b;
+    int rowNumber;
+    int colNumber;
     int count;
     boolean isTrue = true;
 
 
     public MineSweeper(int row, int col) {
-        this.rowNumber = row;
-        this.colNumber = col;
+        this.row = row;
+        this.col = col;
         this.gameMap = new String[row][col];
         this.mayinMap = new String[row][col];
         this.mayinSayisi = (row * col) / 4;
@@ -23,8 +23,8 @@ public class MineSweeper {
     }
 
     public void mayinMap() {
-        for (int i = 0; i < rowNumber; i++) {
-            for (int j = 0; j < colNumber; j++) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
                 mayinMap[i][j] = "-";
                 gameMap[i][j] = "-";
 
@@ -35,8 +35,8 @@ public class MineSweeper {
     public void randomNumber() {
         Random r = new Random();
         for (int i = 0; i <=this.mayinSayisi; i++) {
-            int rsayi = r.nextInt(this.rowNumber);
-            int rsayi2 = r.nextInt(this.colNumber);
+            int rsayi = r.nextInt(this.row);
+            int rsayi2 = r.nextInt(this.col);
             if (!this.mayinMap[rsayi][rsayi2].equals("*")) {
                 this.mayinMap[rsayi][rsayi2] = "*";
             }
@@ -46,8 +46,8 @@ public class MineSweeper {
     public void printmayinMap() {
         System.out.println("Mayinlarin Konumu");
         randomNumber();
-        for (int i = 0; i < this.rowNumber; i++) {
-            for (int j = 0; j < this.colNumber; j++) {
+        for (int i = 0; i < this.row; i++) {
+            for (int j = 0; j < this.col; j++) {
                 if (!this.mayinMap[i][j].equals("*")) {
                     this.mayinMap[i][j] = "-";
                 }
@@ -59,8 +59,8 @@ public class MineSweeper {
     }
 
     public void printGameMap() {
-        for (int i = 0; i < this.rowNumber; i++) {
-            for (int j = 0; j < this.colNumber; j++) {
+        for (int i = 0; i < this.row; i++) {
+            for (int j = 0; j < this.col; j++) {
                 this.gameMap[i][j] = "-";
                 System.out.print(this.gameMap[i][j] + " ");
             }
@@ -74,15 +74,15 @@ public class MineSweeper {
         isTrue = false;
         while (!isTrue) {
             System.out.print("Satir Giriniz : ");
-            a = inp.nextInt();
+           rowNumber = inp.nextInt();
             System.out.print("Sutun Giriniz : ");
-            b = inp.nextInt();
+            colNumber = inp.nextInt();
             System.out.println("==================================");
-            if (a > rowNumber || b > colNumber) {
+            if (rowNumber > row || colNumber > col) {
                 System.out.println("Map sinirlari disinda secim yaptınız tekrar giriniz !");
                 continue;
             }
-            if (mayinMap[a][b].equals("*")) {
+            if (mayinMap[rowNumber][colNumber].equals("*")) {
                 System.out.println("Game Over!");
                 printmayinMap();
                 break;
@@ -99,9 +99,9 @@ public class MineSweeper {
 
     public void control() {
         count = 0;
-        for (int i = (a - 1); i <= (a + 1); i++) {
-            for (int j = (b - 1); j <= (b + 1); j++) {
-                if (i < 0 || j < 0 || i >= this.rowNumber || j >= this.colNumber) {
+        for (int i = (rowNumber - 1); i <= (rowNumber + 1); i++) {
+            for (int j = (colNumber - 1); j <= (colNumber + 1); j++) {
+                if (i < 0 || j < 0 || i >= this.row || j >= this.col) {
                     continue;
                 }
                 if (this.mayinMap[i][j].equals("*")) {
@@ -110,10 +110,10 @@ public class MineSweeper {
             }
         }
 
-        this.gameMap[a][b] = String.valueOf(count);
-        this.mayinMap[a][b] = String.valueOf(count);
-        for (int i = 0; i < this.rowNumber; i++) {
-            for (int j = 0; j < this.colNumber; j++) {
+        this.gameMap[rowNumber][colNumber] = String.valueOf(count);
+        this.mayinMap[rowNumber][colNumber] = String.valueOf(count);
+        for (int i = 0; i < this.row; i++) {
+            for (int j = 0; j < this.col; j++) {
                 System.out.print(this.gameMap[i][j] + " ");
             }
             System.out.println("");
@@ -121,8 +121,8 @@ public class MineSweeper {
     }
 
     public boolean finish() {
-        for (int i = 0; i < this.rowNumber; i++) {
-            for (int j = 0; j < this.colNumber; j++) {
+        for (int i = 0; i < this.row; i++) {
+            for (int j = 0; j < this.col; j++) {
                 if (this.mayinMap[i][j].equals("-")) {
                     return false;
                 }

@@ -12,5 +12,7 @@ public class Main {
         MineSweeper mayin=new MineSweeper(row,col);
         mayin.run();
 
+
+
     }
 }
