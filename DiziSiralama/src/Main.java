@@ -9,7 +9,7 @@ public class Main {
         int[] dizi=new int[eleman];
         System.out.println("Elemanları giriniz...");
         for (int i=0;i<= dizi.length-1;i++){
-            System.out.println(i+1+" . eleman : ");
+            System.out.print(i+1+" . eleman : ");
             dizi[i]=input.nextInt();
         }
         Arrays.sort(dizi);
