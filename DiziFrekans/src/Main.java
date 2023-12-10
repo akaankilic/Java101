@@ -12,7 +12,6 @@ public class Main {
             if (eleman == -1) {
                 continue;
             }
-
             for (int j = i; j < dizi.length; j++) {
                 if (eleman == dizi[j]) {
                     frekans++;
