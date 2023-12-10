@@ -6,10 +6,11 @@ public class Main {
         System.out.println("**Mayın Tarlasına Hoşgeldin.**");
         System.out.println("Oynamak istediğiniz genişlik ve uzunluğu giriniz\n==================================");
         System.out.print("Uzunluk : ");
-        int row= input.nextInt();
+        int satir= input.nextInt();
         System.out.print("Genişlik : ");
-        int col=input.nextInt();
-        MineSweeper mayin=new MineSweeper(row,col);
+        int sutun=input.nextInt();
+        System.out.println("===============================");
+        MineSweeper mayin=new MineSweeper(satir,sutun);
         mayin.run();
 
 

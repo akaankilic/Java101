@@ -1,137 +1,220 @@
+
 import java.util.Random;
 import java.util.Scanner;
 
 public class MineSweeper {
-    int row;
-    int col;
-    String[][] mayinMap;
-    String[][] gameMap;
-    int mayinSayisi;
-    int rowNumber;
-    int colNumber;
-    int count;
-    boolean isTrue = true;
+    String[][] oyun;
+    String[][] baslangic;
 
 
-    public MineSweeper(int row, int col) {
-        this.row = row;
-        this.col = col;
-        this.gameMap = new String[row][col];
-        this.mayinMap = new String[row][col];
-        this.mayinSayisi = (row * col) / 4;
+
+    public MineSweeper(int satir,int sutun){
+
+        this.oyun= new String[satir][sutun];
+        this.baslangic=new String[satir][sutun];
 
     }
-
-    public void mayinMap() {
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                mayinMap[i][j] = "-";
-                gameMap[i][j] = "-";
-
-            }
+    public void tahtaYazdir(String[][] temp){
+        System.out.print("  ");
+        for (int t = 0; t <temp[0].length ; t++){
+            System.out.print(t+" ");
         }
-    }
+        System.out.println();
 
-    public void randomNumber() {
-        Random r = new Random();
-        for (int i = 0; i <=this.mayinSayisi; i++) {
-            int rsayi = r.nextInt(this.row);
-            int rsayi2 = r.nextInt(this.col);
-            if (!this.mayinMap[rsayi][rsayi2].equals("*")) {
-                this.mayinMap[rsayi][rsayi2] = "*";
-            }
-        }
-    }
 
-    public void printmayinMap() {
-        System.out.println("Mayinlarin Konumu");
-        randomNumber();
-        for (int i = 0; i < this.row; i++) {
-            for (int j = 0; j < this.col; j++) {
-                if (!this.mayinMap[i][j].equals("*")) {
-                    this.mayinMap[i][j] = "-";
+        for (int i = 0; i < temp.length ; i++) {
+            System.out.print(i+"[");
+
+            for (int j = 0; j <temp[i].length ; j++) {
+
+                System.out.print(temp[i][j]);
+                if (j==temp[i].length-1){
+                    System.out.print("]");
                 }
-                System.out.print(this.mayinMap[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println("==================================");
-    }
+                else {
+                    System.out.print("|");
+                }
 
-    public void printGameMap() {
-        for (int i = 0; i < this.row; i++) {
-            for (int j = 0; j < this.col; j++) {
-                this.gameMap[i][j] = "-";
-                System.out.print(this.gameMap[i][j] + " ");
             }
             System.out.println();
 
         }
+
     }
 
-    public void indisSecme() {
-        Scanner inp = new Scanner(System.in);
-        isTrue = false;
-        while (!isTrue) {
-            System.out.print("Satir Giriniz : ");
-           rowNumber = inp.nextInt();
-            System.out.print("Sutun Giriniz : ");
-            colNumber = inp.nextInt();
-            System.out.println("==================================");
-            if (rowNumber > row || colNumber > col) {
-                System.out.println("Map sinirlari disinda secim yaptınız tekrar giriniz !");
-                continue;
-            }
-            if (mayinMap[rowNumber][colNumber].equals("*")) {
-                System.out.println("Game Over!");
-                printmayinMap();
-                break;
+    //dizide var mı kontrolü. Mayın yerlerini belirlerken kullanıldı
+    private static boolean check(int[] arr, int toCheckValue)
+    {
 
+        for (int i = 0; i <arr.length ; i++) {
+            if (arr[i]==toCheckValue){
+                return true;
             }
-            control();
-            if (finish()) {
+        }
 
-                System.out.println("Tebrikler kazandiniz :)))))");
-                break;
+        return false;
+    }
+
+    public void tahtayiDuzle(String[][] temp){
+        for (int i = 0; i < temp.length; i++) {
+            for (int j = 0; j < temp[i].length; j++) {
+                temp[i][j]="-";
             }
         }
     }
 
-    public void control() {
-        count = 0;
-        for (int i = (rowNumber - 1); i <= (rowNumber + 1); i++) {
-            for (int j = (colNumber - 1); j <= (colNumber + 1); j++) {
-                if (i < 0 || j < 0 || i >= this.row || j >= this.col) {
-                    continue;
-                }
-                if (this.mayinMap[i][j].equals("*")) {
-                    count++;
-                }
+    public String[][] tahtaDoldur(String[][] temp){
+        //İlk olarak hepsini - yapıyoruz
+        tahtayiDuzle(temp);
+
+        int mayinSay = (temp.length*temp[0].length)/4;
+        Random rand = new Random();
+        int[] mayinYerleri = new int[mayinSay];
+        int i=0;
+
+
+        //Mayın yerlerinin random belirlenmesi
+
+        while (mayinYerleri[mayinSay-1]==0){
+            int rand_int = rand.nextInt(temp.length*temp[0].length);
+
+            if (check(mayinYerleri,rand_int)==false){
+                mayinYerleri[i]=rand_int;
+                i++;
             }
+
+        }
+        //Mayınların tahtaya dizilmesi
+        for (int j = 0; j < mayinYerleri.length; j++) {
+            int satir=mayinYerleri[j]/temp[0].length;
+            int sutun=(mayinYerleri[j]-satir*temp[0].length);
+
+            temp[satir][sutun]="*";
+
         }
 
-        this.gameMap[rowNumber][colNumber] = String.valueOf(count);
-        this.mayinMap[rowNumber][colNumber] = String.valueOf(count);
-        for (int i = 0; i < this.row; i++) {
-            for (int j = 0; j < this.col; j++) {
-                System.out.print(this.gameMap[i][j] + " ");
-            }
-            System.out.println("");
-        }
+        return temp;
     }
 
-    public boolean finish() {
-        for (int i = 0; i < this.row; i++) {
-            for (int j = 0; j < this.col; j++) {
-                if (this.mayinMap[i][j].equals("-")) {
-                    return false;
-                }
+    //verilen sayının tahtada var mı yok mu kontrolü
+    public boolean tahtayaUygunMu(int x,String yön){
+        if (x<0){
+            return false;
+        }
+        if (yön=="satır"){
+
+            if (x>=this.oyun.length){
+                return false;
+            }
+
+        }else {
+            if (x>=this.oyun[0].length){
+                return false;
             }
         }
+
         return true;
     }
-    public void run() {
-        mayinMap();
-        indisSecme();
+
+
+    public int yanindaBombaSay(int x,int y){
+        int bombsay=0;
+        //bulundugu satırın sağı solu
+        if (tahtayaUygunMu(y-1,"sutun") && oyun[x][y-1]=="*"){
+            bombsay+=1;
+        }
+        if (tahtayaUygunMu(y+1,"sutun") && oyun[x][y+1]=="*"){
+            bombsay+=1;
+        }
+        //bir üst satır
+        if (tahtayaUygunMu(x+1,"satır")){
+            if (oyun[x+1][y]=="*"){
+                bombsay+=1;
+            }
+            if (tahtayaUygunMu(y-1,"sutun") && oyun[x+1][y-1]=="*"){
+                bombsay+=1;
+            }
+            if (tahtayaUygunMu(y+1,"sutun") && oyun[x+1][y+1]=="*"){
+                bombsay+=1;
+            }
+
+        }
+
+        //alt satır
+        if (tahtayaUygunMu(x-1,"satır")){
+            if (oyun[x-1][y]=="*"){
+                bombsay+=1;
+            }
+            if (tahtayaUygunMu(y-1,"sutun") && oyun[x-1][y-1]=="*"){
+                bombsay+=1;
+            }
+            if (tahtayaUygunMu(y+1,"sutun") && oyun[x-1][y+1]=="*"){
+                bombsay+=1;
+            }
+        }
+
+        return bombsay;
     }
+
+    public void run(){
+        tahtayiDuzle(baslangic);
+        tahtaDoldur(oyun);
+
+        tahtaYazdir(baslangic);
+        int tur=1;
+
+
+        boolean temp=true;
+        while (temp){
+            Scanner input = new Scanner(System.in);
+            System.out.print("Satır Giriniz: ");
+            int satir=input.nextInt();
+            while (satir<0 || satir>=baslangic.length ){
+                System.out.println("Lütfen 0 ile "+(oyun.length-1)+" arasında bir sayı girin(çıkmak için -1)");
+                satir=input.nextInt();
+                if (satir==-1){
+                    break;
+                }
+            }
+            System.out.print("Sütun Giriniz: ");
+            int sutun=input.nextInt();
+            while (sutun<0 || sutun>=baslangic[0].length){
+                System.out.println("Lütfen 0 ile "+(oyun[0].length-1)+" arasında bir sayı girin(çıkmak için -1)");
+                sutun=input.nextInt();
+                if (sutun==-1){
+                    break;
+                }
+            }
+            if (satir==-1 || sutun==-1){
+                temp=false;
+                break;
+            }
+
+
+            if (this.oyun[satir][sutun]=="*"){
+                System.out.println("GAME OVER");
+                tahtaYazdir(oyun);
+                temp=false;
+            }
+            else {
+                baslangic[satir][sutun]=Integer.toString(yanindaBombaSay(satir,sutun));
+                if (tur>=(oyun.length*oyun[0].length-(oyun.length*oyun[0].length/4))){
+                    System.out.println("TEBRİKLER KAZANDINIZ");
+                    tahtaYazdir(baslangic);
+                    temp=false;
+                    break;
+                }
+                tur+=1;
+
+
+                tahtaYazdir(baslangic);
+            }
+
+        }
+
+
+
+    }
+
+
 }
